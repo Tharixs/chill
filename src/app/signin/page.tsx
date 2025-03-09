@@ -22,6 +22,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
+import { PasswordInput } from "@/components/ui/password-input";
 
 const FormFields = [
   {
@@ -88,20 +89,29 @@ export default function Page() {
                     <div key={item.id} className="flex flex-col space-y-1.5">
                       <FormField
                         control={form.control}
-                        name="username"
+                        name={item.name}
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-white">
                               {item.label}
                             </FormLabel>
                             <FormControl>
-                              <Input
-                                id={item.id}
-                                placeholder={item.placeholder}
-                                className="rounded-full border-neutral-600"
-                                type={item.type}
-                                {...field}
-                              />
+                              {item.type === "password" ? (
+                                <PasswordInput
+                                  id={item.id}
+                                  className="text-white rounded-full border-neutral-600"
+                                  placeholder={item.placeholder}
+                                  {...field}
+                                />
+                              ) : (
+                                <Input
+                                  id={item.id}
+                                  placeholder={item.placeholder}
+                                  className="text-white rounded-full border-neutral-600"
+                                  type={item.type}
+                                  {...field}
+                                />
+                              )}
                             </FormControl>
                             {item.type === "password" && (
                               <div className="flex justify-between">
