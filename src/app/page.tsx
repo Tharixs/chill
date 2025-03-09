@@ -11,6 +11,7 @@ import Footer from "./home/footer";
 import Navbar from "./home/navbar";
 
 export default function page() {
+  // comment
   return (
     <div className="bg-neutral-900">
       <Navbar theme="dark" />
