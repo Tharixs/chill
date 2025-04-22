@@ -63,7 +63,8 @@ export default function Page() {
     }
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     form.handleSubmit((val) => {
       // Handle form submission
       const result = register(val.username, val.password);

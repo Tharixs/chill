@@ -56,8 +56,8 @@ export default function Page() {
     }
   }, []);
 
-  const handleSubmit = () => {
-    console.log(form.getValues());
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     form.handleSubmit((val) => {
       // Handle form submission
       const result = login(val.username, val.password);
