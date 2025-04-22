@@ -3,17 +3,26 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, LogOut, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useAuth } from "../contexts/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Navbar({ theme }: { theme: string }) {
+  const { user, logout } = useAuth(); // <- tambahkan logout
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
     { href: "/", label: "Beranda" },
     { href: "/series", label: "Series" },
-    { href: "/film", label: "film" },
+    { href: "/film", label: "Film" },
     { href: "/daftar-saya", label: "Daftar Saya" },
   ];
 
@@ -22,6 +31,7 @@ export default function Navbar({ theme }: { theme: string }) {
 
   const themeClass = theme === "dark" ? "text-neutral-400" : "text-gray-800";
   const pathName = usePathname();
+  console.log(user);
 
   return (
     <nav
@@ -54,7 +64,7 @@ export default function Navbar({ theme }: { theme: string }) {
                     "text-gray-600 hover:text-primary",
                     `${
                       pathName === link.href
-                        ? themeClass + "hover:text-white"
+                        ? themeClass + " hover:text-white"
                         : themeClass + " hover:text-white"
                     }`
                   )}
@@ -64,18 +74,51 @@ export default function Navbar({ theme }: { theme: string }) {
               ))}
             </div>
           </div>
+
+          {/* Auth Button */}
           <div className="hidden md:flex space-x-4">
-            <Link href={"/signin"}>
-              <Button
-                variant="link"
-                className={dynamicClass("latin-font", "", themeClass)}
-              >
-                Masuk
-              </Button>
-            </Link>
-            <Link href={"/signup"}>
-              <Button variant="default">Daftar</Button>
-            </Link>
+            {user ? (
+              <div className="hidden md:flex space-x-4 items-center">
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <div className="hidden sm:flex space-x-4 items-center">
+                      <div className="flex items-center gap-2">
+                        <Avatar>
+                          <AvatarImage src="https://github.com/shadcn.png" />
+                          <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
+                        {/* <span className="latin-font font-medium text-sm">
+                      {session.email}
+                    </span> */}
+                      </div>
+                      <ChevronDown className="h-4 w-4" />
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem>
+                      <span
+                        onClick={() => logout()}
+                        className="flex items-center"
+                      >
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Keluar
+                      </span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            ) : (
+              <>
+                <Link href={"/signin"}>
+                  <Button variant="link" className={themeClass}>
+                    Masuk
+                  </Button>
+                </Link>
+                <Link href={"/signup"}>
+                  <Button variant="default">Daftar</Button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -115,16 +158,28 @@ export default function Navbar({ theme }: { theme: string }) {
           </div>
 
           <div className="border-t border-gray-200 px-4 py-3">
-            <Link href={"/signin"}>
-              <Button variant="ghost" className="w-full text-left">
-                Masuk
+            {user ? (
+              <Button
+                variant="ghost"
+                className="w-full text-left"
+                onClick={logout}
+              >
+                Logout
               </Button>
-            </Link>
-            <Link href={"/signup"}>
-              <Button variant="default" className="w-full mt-2">
-                Daftar
-              </Button>
-            </Link>
+            ) : (
+              <>
+                <Link href={"/signin"}>
+                  <Button variant="ghost" className="w-full text-left">
+                    Masuk
+                  </Button>
+                </Link>
+                <Link href={"/signup"}>
+                  <Button variant="default" className="w-full mt-2">
+                    Daftar
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

@@ -23,6 +23,8 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { PasswordInput } from "@/components/ui/password-input";
+import { useAuth } from "../contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 const FormFields = [
   {
@@ -49,8 +51,10 @@ const FormFields = [
 ];
 
 export default function Page() {
+  const { register } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
   const form = useForm();
+  const router = useRouter();
 
   useEffect(() => {
     // Check if the screen is mobile
@@ -58,6 +62,22 @@ export default function Page() {
       setIsMobile(true);
     }
   }, []);
+
+  const handleSubmit = () => {
+    form.handleSubmit((val) => {
+      // Handle form submission
+      const result = register(val.username, val.password);
+      if (result) {
+        // show success message
+        alert("Register successful!");
+        // redirect to dashboard use router next
+        router.push("/signin");
+      } else {
+        // show error message
+        alert("Username already exists!");
+      }
+    })();
+  };
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
@@ -88,8 +108,8 @@ export default function Page() {
               Selamat datang!
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <form>
+          <form onSubmit={handleSubmit}>
+            <CardContent>
               <div className="grid w-full items-center gap-4 space-y-4">
                 <Form {...form}>
                   {FormFields.map((item) => (
@@ -97,6 +117,7 @@ export default function Page() {
                       <FormField
                         control={form.control}
                         name={item.name}
+                        shouldUnregister
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-white">
@@ -136,30 +157,31 @@ export default function Page() {
                   ))}
                 </Form>
               </div>
-            </form>
-          </CardContent>
-          <CardFooter className="flex-col space-y-2">
-            <Button
-              variant="default"
-              className="bg-neutral-700 rounded-full w-full text-xs"
-            >
-              Daftar
-            </Button>
-            <p className="text-neutral-300 text-xs font-light">Atau</p>
-            <Button
-              variant="outline"
-              className="bg-transparent rounded-full w-full text-white text-xs"
-            >
-              <Image
-                src="/icon-google.svg"
-                alt="google icon"
-                width={18}
-                height={18}
-                className="mr-2"
-              />
-              Daftar dengan google
-            </Button>
-          </CardFooter>
+            </CardContent>
+            <CardFooter className="flex-col space-y-2 mt-4">
+              <Button
+                type="submit"
+                variant="default"
+                className="bg-neutral-700 rounded-full w-full text-xs"
+              >
+                Daftar
+              </Button>
+              <p className="text-neutral-300 text-xs font-light">Atau</p>
+              <Button
+                variant="outline"
+                className="bg-transparent rounded-full w-full text-white text-xs"
+              >
+                <Image
+                  src="/icon-google.svg"
+                  alt="google icon"
+                  width={18}
+                  height={18}
+                  className="mr-2"
+                />
+                Daftar dengan google
+              </Button>
+            </CardFooter>
+          </form>
         </Card>
       </main>
     </div>
