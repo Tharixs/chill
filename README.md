@@ -5,6 +5,14 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
+yarn install
+#or
+npm install 
+
+impor mysql db 
+#or 
+migrate with prisma 
+
 npm run dev
 # or
 yarn dev
