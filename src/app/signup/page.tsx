@@ -23,16 +23,27 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { PasswordInput } from "@/components/ui/password-input";
-import { useAuth } from "../contexts/AuthContext";
 import { useRouter } from "next/navigation";
+import { handleSignUp } from "../actions/authActions";
+import { signUpSchema } from "@/lib/zod";
+import { toast } from "sonner";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const FormFields = [
   {
-    id: "username",
-    name: "username",
-    label: "Username",
+    id: "name",
+    name: "name",
+    label: "Name",
     type: "text",
-    placeholder: "Masukkan username",
+    placeholder: "Masukkan name",
+  },
+  {
+    id: "email",
+    name: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "Masukkan email",
   },
   {
     id: "password",
@@ -42,8 +53,8 @@ const FormFields = [
     placeholder: "Masukkan kata sandi",
   },
   {
-    id: "conf-password",
-    name: "conf-password",
+    id: "confirmPassword",
+    name: "confirmPassword",
     label: "Konfirmasi Kata Sandi",
     type: "password",
     placeholder: "Masukkan kata sandi",
@@ -51,9 +62,11 @@ const FormFields = [
 ];
 
 export default function Page() {
-  const { register } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
-  const form = useForm();
+  const form = useForm({
+    resolver: zodResolver(signUpSchema),
+    mode: "onChange",
+  });
   const router = useRouter();
 
   useEffect(() => {
@@ -63,19 +76,24 @@ export default function Page() {
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    form.handleSubmit((val) => {
+    form.handleSubmit(async (val) => {
       // Handle form submission
-      const result = register(val.username, val.password);
+      const result = await handleSignUp({
+        name: val.name,
+        email: val.email,
+        password: val.password,
+        confirmPassword: val.confirmPassword,
+      });
       if (result) {
         // show success message
-        alert("Register successful!");
+        toast.success("Berhasil membuat akun");
         // redirect to dashboard use router next
         router.push("/signin");
       } else {
         // show error message
-        alert("Username already exists!");
+        toast.error("Gagal membuat akun");
       }
     })();
   };
@@ -117,7 +135,13 @@ export default function Page() {
                     <div key={item.id} className="flex flex-col space-y-1.5">
                       <FormField
                         control={form.control}
-                        name={item.name}
+                        name={
+                          item.name as
+                            | "name"
+                            | "email"
+                            | "password"
+                            | "confirmPassword"
+                        }
                         shouldUnregister
                         render={({ field }) => (
                           <FormItem>

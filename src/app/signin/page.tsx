@@ -23,16 +23,19 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { PasswordInput } from "@/components/ui/password-input";
-import { useAuth } from "../contexts/AuthContext";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signInSchema } from "@/lib/zod";
+import { signIn } from "next-auth/react";
+import { toast } from "sonner";
 
 const FormFields = [
   {
-    id: "username",
-    name: "username",
-    label: "Username",
+    id: "email",
+    name: "email",
+    label: "Email",
     type: "text",
-    placeholder: "Masukkan username",
+    placeholder: "Masukkan email",
   },
   {
     id: "password",
@@ -45,8 +48,10 @@ const FormFields = [
 
 export default function Page() {
   const [isMobile, setIsMobile] = useState(false);
-  const { login } = useAuth();
-  const form = useForm();
+  const form = useForm({
+    resolver: zodResolver(signInSchema),
+    mode: "onChange",
+  });
   const router = useRouter();
 
   useEffect(() => {
@@ -58,17 +63,20 @@ export default function Page() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    form.handleSubmit((val) => {
-      // Handle form submission
-      const result = login(val.username, val.password);
-      if (result) {
-        // show success message
-        alert("Login successful!");
-        // redirect to dashboard use router next
-        router.push("/");
+    form.handleSubmit(async (val) => {
+      // Panggil signIn dari next-auth
+      const result = await signIn("credentials", {
+        email: val.email,
+        password: val.password,
+        redirect: false, // jangan redirect otomatis
+      });
+
+      // Cek apakah login berhasil
+      if (result?.ok && !result?.error) {
+        toast.success("Berhasil login");
+        router.push("/"); // Redirect manual
       } else {
-        // show error message
-        alert("Invalid username or password!");
+        toast.error("Email atau password salah!");
         form.reset();
       }
     })();
@@ -111,7 +119,7 @@ export default function Page() {
                     <div key={item.id} className="flex flex-col space-y-1.5">
                       <FormField
                         control={form.control}
-                        name={item.name}
+                        name={item.name as "email" | "password"}
                         shouldUnregister
                         render={({ field }) => (
                           <FormItem>
