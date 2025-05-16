@@ -126,6 +126,17 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   role: 'role',
   password: 'password',
+  phone: 'phone',
+  address: 'address',
+  startSubscription: 'startSubscription',
+  endSubscription: 'endSubscription',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserFilmScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -135,12 +146,10 @@ exports.Prisma.FilmScalarFieldEnum = {
   title: 'title',
   description: 'description',
   thumbnail: 'thumbnail',
-  videoUrl: 'videoUrl',
-  type: 'type',
+  views: 'views',
   tag: 'tag',
   genreId: 'genreId',
   maxAge: 'maxAge',
-  totalEpisode: 'totalEpisode',
   rating: 'rating',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -149,6 +158,48 @@ exports.Prisma.FilmScalarFieldEnum = {
 exports.Prisma.GenreScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MovieScalarFieldEnum = {
+  id: 'id',
+  filmId: 'filmId',
+  title: 'title',
+  description: 'description',
+  videoUrl: 'videoUrl',
+  thumbnail: 'thumbnail',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PaketScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  price: 'price',
+  benefits: 'benefits',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  paketId: 'paketId',
+  totalPrice: 'totalPrice',
+  orderDate: 'orderDate',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PaymentScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  amountPaid: 'amountPaid',
+  paymentDate: 'paymentDate',
+  paymentMethod: 'paymentMethod',
+  paymentStatus: 'paymentStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -167,7 +218,14 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
-  password: 'password'
+  password: 'password',
+  phone: 'phone',
+  address: 'address'
+};
+
+exports.Prisma.UserFilmOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId'
 };
 
 exports.Prisma.FilmOrderByRelevanceFieldEnum = {
@@ -175,7 +233,6 @@ exports.Prisma.FilmOrderByRelevanceFieldEnum = {
   title: 'title',
   description: 'description',
   thumbnail: 'thumbnail',
-  videoUrl: 'videoUrl',
   tag: 'tag',
   genreId: 'genreId'
 };
@@ -184,21 +241,54 @@ exports.Prisma.GenreOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name'
 };
+
+exports.Prisma.MovieOrderByRelevanceFieldEnum = {
+  id: 'id',
+  filmId: 'filmId',
+  title: 'title',
+  description: 'description',
+  videoUrl: 'videoUrl',
+  thumbnail: 'thumbnail'
+};
+
+exports.Prisma.paketOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title',
+  benefits: 'benefits'
+};
+
+exports.Prisma.OrderOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  paketId: 'paketId'
+};
+
+exports.Prisma.PaymentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  paymentMethod: 'paymentMethod',
+  paymentStatus: 'paymentStatus'
+};
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
   ADMIN: 'ADMIN'
 };
 
-exports.FilmType = exports.$Enums.FilmType = {
-  NEW_RELEASE: 'NEW_RELEASE',
-  TOP_RATED: 'TOP_RATED',
-  PREMIUM: 'PREMIUM'
+exports.OrderStatus = exports.$Enums.OrderStatus = {
+  PAID: 'PAID',
+  PANDING: 'PANDING',
+  CANCELLED: 'CANCELLED'
 };
 
 exports.Prisma.ModelName = {
   User: 'User',
+  UserFilm: 'UserFilm',
   Film: 'Film',
-  Genre: 'Genre'
+  Genre: 'Genre',
+  Movie: 'Movie',
+  paket: 'paket',
+  Order: 'Order',
+  Payment: 'Payment'
 };
 
 /**

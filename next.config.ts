@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "img.youtube.com",
       },
+      {
+        hostname: "i9.ytimg.com",
+      },
     ],
   },
 };

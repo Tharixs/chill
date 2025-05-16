@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { prisma } from "@/lib/prisma";
 import { checkSession, formatApiResponse, handleError } from "@/lib/utils";
-import { filmSchema } from "@/lib/zod";
+import { movieSchema } from "@/lib/zod";
 import { NextRequest, NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,11 +12,11 @@ export async function POST(req: NextRequest) {
       return session;
     }
     const body = await req.json();
-    const validatedData = filmSchema.parse(body);
-    const film = await prisma.film.create({
+    const validatedData = movieSchema.parse(body);
+    const movie = await prisma.movie.create({
       data: validatedData as any,
     });
-    const response = formatApiResponse(film);
+    const response = formatApiResponse(movie);
     return NextResponse.json(response);
   } catch (error: any) {
     return NextResponse.json(handleError(error), { status: 500 });

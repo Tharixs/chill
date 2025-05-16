@@ -41,15 +41,31 @@ export const filmSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
   thumbnail: z.string().min(1, "Thumbnail is required"),
-  videoUrl: z.string().min(1, "Video URL is required"),
+  views: z.number().nullable().optional(),
+  tag: z.string().min(1, "Tag is required"),
   genreId: z.string().min(1, "Genre is required"),
   maxAge: z.number().min(1, "Max Age is required"),
-  totalEpisode: z.number().min(1, "Total Episode is required"),
   rating: z.number().min(1, "Rating is required"),
-  type: z.string().min(1, "Type is required"),
-  tag: z.string().min(1, "Tag is required"),
 });
 
 export const genreSchema = z.object({
   name: z.string().min(1, "Name is required"),
+});
+
+export const userSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z
+    .string({ required_error: "Email is required" })
+    .min(1, "Email is required")
+    .email("Invalid email"),
+  phone: z.string().min(1, "Phone is required"),
+  address: z.string().min(1, "Address is required"),
+});
+
+export const movieSchema = z.object({
+  filmId: z.string().min(1, "Film is required"),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().optional(),
+  videoUrl: z.string().min(1, "Video URL is required"),
+  thumbnail: z.string().min(1, "Thumbnail is required"),
 });
