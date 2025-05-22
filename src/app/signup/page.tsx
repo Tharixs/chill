@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { PasswordInput } from "@/components/ui/password-input";
-import { useRouter } from "next/navigation";
 import { handleSignUp } from "../actions/authActions";
 import { signUpSchema } from "@/lib/zod";
 import { toast } from "sonner";
@@ -67,7 +66,6 @@ export default function Page() {
     resolver: zodResolver(signUpSchema),
     mode: "onChange",
   });
-  const router = useRouter();
 
   useEffect(() => {
     // Check if the screen is mobile
@@ -88,9 +86,7 @@ export default function Page() {
       });
       if (result) {
         // show success message
-        toast.success("Berhasil membuat akun");
-        // redirect to dashboard use router next
-        router.push("/signin");
+        alert("Berhasil membuat akun, buka email dan verifikasi email anda");
       } else {
         // show error message
         toast.error("Gagal membuat akun");

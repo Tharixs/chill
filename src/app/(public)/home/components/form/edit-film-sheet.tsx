@@ -30,7 +30,6 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { FilmType } from "@/generated/prisma";
 import { filmSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -64,13 +63,6 @@ const FormFields = [
     name: "videoUrl",
     label: "Video URL",
     type: "text",
-  },
-  {
-    id: "type",
-    name: "type",
-    label: "Tipe",
-    type: "select",
-    placeholder: "Pilih tipe",
   },
   {
     id: "tag",
@@ -189,30 +181,11 @@ export function EditFilmSheet({
                                 <SelectValue placeholder={item.placeholder} />
                               </SelectTrigger>
                               <SelectContent>
-                                {item.name === "genreId"
-                                  ? genres?.data?.items?.map((item, index) => (
-                                      <SelectItem value={item.id} key={index}>
-                                        {item.name}
-                                      </SelectItem>
-                                    ))
-                                  : [
-                                      {
-                                        key: FilmType.NEW_RELEASE,
-                                        value: "Episode Baru",
-                                      },
-                                      {
-                                        key: FilmType.TOP_RATED,
-                                        value: "Top Rated",
-                                      },
-                                      {
-                                        key: FilmType.PREMIUM,
-                                        value: "Premium",
-                                      },
-                                    ].map((item, index) => (
-                                      <SelectItem value={item.key} key={index}>
-                                        {item.value}
-                                      </SelectItem>
-                                    ))}
+                                {genres?.data?.items?.map((item, index) => (
+                                  <SelectItem value={item.id} key={index}>
+                                    {item.name}
+                                  </SelectItem>
+                                ))}
                               </SelectContent>
                             </Select>
                           ) : null}

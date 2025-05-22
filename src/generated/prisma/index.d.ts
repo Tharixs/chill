@@ -1695,6 +1695,8 @@ export namespace Prisma {
     address: string | null
     startSubscription: Date | null
     endSubscription: Date | null
+    email_verify_token: string | null
+    email_verified: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1709,6 +1711,8 @@ export namespace Prisma {
     address: string | null
     startSubscription: Date | null
     endSubscription: Date | null
+    email_verify_token: string | null
+    email_verified: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1723,6 +1727,8 @@ export namespace Prisma {
     address: number
     startSubscription: number
     endSubscription: number
+    email_verify_token: number
+    email_verified: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1739,6 +1745,8 @@ export namespace Prisma {
     address?: true
     startSubscription?: true
     endSubscription?: true
+    email_verify_token?: true
+    email_verified?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1753,6 +1761,8 @@ export namespace Prisma {
     address?: true
     startSubscription?: true
     endSubscription?: true
+    email_verify_token?: true
+    email_verified?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1767,6 +1777,8 @@ export namespace Prisma {
     address?: true
     startSubscription?: true
     endSubscription?: true
+    email_verify_token?: true
+    email_verified?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1854,6 +1866,8 @@ export namespace Prisma {
     address: string | null
     startSubscription: Date | null
     endSubscription: Date | null
+    email_verify_token: string | null
+    email_verified: boolean | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1885,6 +1899,8 @@ export namespace Prisma {
     address?: boolean
     startSubscription?: boolean
     endSubscription?: boolean
+    email_verify_token?: boolean
+    email_verified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     UserFilm?: boolean | User$UserFilmArgs<ExtArgs>
@@ -1904,11 +1920,13 @@ export namespace Prisma {
     address?: boolean
     startSubscription?: boolean
     endSubscription?: boolean
+    email_verify_token?: boolean
+    email_verified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "role" | "password" | "phone" | "address" | "startSubscription" | "endSubscription" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "role" | "password" | "phone" | "address" | "startSubscription" | "endSubscription" | "email_verify_token" | "email_verified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     UserFilm?: boolean | User$UserFilmArgs<ExtArgs>
     Order?: boolean | User$OrderArgs<ExtArgs>
@@ -1931,6 +1949,8 @@ export namespace Prisma {
       address: string | null
       startSubscription: Date | null
       endSubscription: Date | null
+      email_verify_token: string | null
+      email_verified: boolean | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2313,6 +2333,8 @@ export namespace Prisma {
     readonly address: FieldRef<"User", 'String'>
     readonly startSubscription: FieldRef<"User", 'DateTime'>
     readonly endSubscription: FieldRef<"User", 'DateTime'>
+    readonly email_verify_token: FieldRef<"User", 'String'>
+    readonly email_verified: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -9742,6 +9764,8 @@ export namespace Prisma {
     address: 'address',
     startSubscription: 'startSubscription',
     endSubscription: 'endSubscription',
+    email_verify_token: 'email_verify_token',
+    email_verified: 'email_verified',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -9862,7 +9886,8 @@ export namespace Prisma {
     name: 'name',
     password: 'password',
     phone: 'phone',
-    address: 'address'
+    address: 'address',
+    email_verify_token: 'email_verify_token'
   };
 
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -9963,6 +9988,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -9999,6 +10031,8 @@ export namespace Prisma {
     address?: StringNullableFilter<"User"> | string | null
     startSubscription?: DateTimeNullableFilter<"User"> | Date | string | null
     endSubscription?: DateTimeNullableFilter<"User"> | Date | string | null
+    email_verify_token?: StringNullableFilter<"User"> | string | null
+    email_verified?: BoolNullableFilter<"User"> | boolean | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     UserFilm?: UserFilmListRelationFilter
@@ -10015,6 +10049,8 @@ export namespace Prisma {
     address?: SortOrderInput | SortOrder
     startSubscription?: SortOrderInput | SortOrder
     endSubscription?: SortOrderInput | SortOrder
+    email_verify_token?: SortOrderInput | SortOrder
+    email_verified?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     UserFilm?: UserFilmOrderByRelationAggregateInput
@@ -10025,6 +10061,7 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    email_verify_token?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
@@ -10035,11 +10072,12 @@ export namespace Prisma {
     address?: StringNullableFilter<"User"> | string | null
     startSubscription?: DateTimeNullableFilter<"User"> | Date | string | null
     endSubscription?: DateTimeNullableFilter<"User"> | Date | string | null
+    email_verified?: BoolNullableFilter<"User"> | boolean | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     UserFilm?: UserFilmListRelationFilter
     Order?: OrderListRelationFilter
-  }, "id" | "email">
+  }, "id" | "email" | "email_verify_token">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10051,6 +10089,8 @@ export namespace Prisma {
     address?: SortOrderInput | SortOrder
     startSubscription?: SortOrderInput | SortOrder
     endSubscription?: SortOrderInput | SortOrder
+    email_verify_token?: SortOrderInput | SortOrder
+    email_verified?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -10071,6 +10111,8 @@ export namespace Prisma {
     address?: StringNullableWithAggregatesFilter<"User"> | string | null
     startSubscription?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     endSubscription?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    email_verify_token?: StringNullableWithAggregatesFilter<"User"> | string | null
+    email_verified?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -10570,6 +10612,8 @@ export namespace Prisma {
     address?: string | null
     startSubscription?: Date | string | null
     endSubscription?: Date | string | null
+    email_verify_token?: string | null
+    email_verified?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     UserFilm?: UserFilmCreateNestedManyWithoutUserInput
@@ -10586,6 +10630,8 @@ export namespace Prisma {
     address?: string | null
     startSubscription?: Date | string | null
     endSubscription?: Date | string | null
+    email_verify_token?: string | null
+    email_verified?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     UserFilm?: UserFilmUncheckedCreateNestedManyWithoutUserInput
@@ -10602,6 +10648,8 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     startSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_verify_token?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UserFilm?: UserFilmUpdateManyWithoutUserNestedInput
@@ -10618,6 +10666,8 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     startSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_verify_token?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UserFilm?: UserFilmUncheckedUpdateManyWithoutUserNestedInput
@@ -10634,6 +10684,8 @@ export namespace Prisma {
     address?: string | null
     startSubscription?: Date | string | null
     endSubscription?: Date | string | null
+    email_verify_token?: string | null
+    email_verified?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10648,6 +10700,8 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     startSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_verify_token?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10662,6 +10716,8 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     startSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_verify_token?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11222,6 +11278,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -11274,6 +11335,8 @@ export namespace Prisma {
     address?: SortOrder
     startSubscription?: SortOrder
     endSubscription?: SortOrder
+    email_verify_token?: SortOrder
+    email_verified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11288,6 +11351,8 @@ export namespace Prisma {
     address?: SortOrder
     startSubscription?: SortOrder
     endSubscription?: SortOrder
+    email_verify_token?: SortOrder
+    email_verified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11302,6 +11367,8 @@ export namespace Prisma {
     address?: SortOrder
     startSubscription?: SortOrder
     endSubscription?: SortOrder
+    email_verify_token?: SortOrder
+    email_verified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11364,6 +11431,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -11843,6 +11918,10 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -12301,6 +12380,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -12392,6 +12476,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -12590,6 +12682,8 @@ export namespace Prisma {
     address?: string | null
     startSubscription?: Date | string | null
     endSubscription?: Date | string | null
+    email_verify_token?: string | null
+    email_verified?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Order?: OrderCreateNestedManyWithoutUserInput
@@ -12605,6 +12699,8 @@ export namespace Prisma {
     address?: string | null
     startSubscription?: Date | string | null
     endSubscription?: Date | string | null
+    email_verify_token?: string | null
+    email_verified?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Order?: OrderUncheckedCreateNestedManyWithoutUserInput
@@ -12671,6 +12767,8 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     startSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_verify_token?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Order?: OrderUpdateManyWithoutUserNestedInput
@@ -12686,6 +12784,8 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     startSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_verify_token?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -13053,6 +13153,8 @@ export namespace Prisma {
     address?: string | null
     startSubscription?: Date | string | null
     endSubscription?: Date | string | null
+    email_verify_token?: string | null
+    email_verified?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     UserFilm?: UserFilmCreateNestedManyWithoutUserInput
@@ -13068,6 +13170,8 @@ export namespace Prisma {
     address?: string | null
     startSubscription?: Date | string | null
     endSubscription?: Date | string | null
+    email_verify_token?: string | null
+    email_verified?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     UserFilm?: UserFilmUncheckedCreateNestedManyWithoutUserInput
@@ -13152,6 +13256,8 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     startSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_verify_token?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UserFilm?: UserFilmUpdateManyWithoutUserNestedInput
@@ -13167,6 +13273,8 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     startSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endSubscription?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_verify_token?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UserFilm?: UserFilmUncheckedUpdateManyWithoutUserNestedInput

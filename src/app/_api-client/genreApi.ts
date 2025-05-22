@@ -4,7 +4,7 @@ import { chillApi } from "../services/api";
 const genreApi = chillApi.injectEndpoints({
   endpoints: (builder) => ({
     getGenres: builder.query<PaginationResponse<Genre>, void>({
-      query: () => "api/genre",
+      query: () => "api/genres",
     }),
     getGenreById: builder.query<DefaultResponseType<Genre>, string>({
       query: (id) => `api/genre/${id}`,

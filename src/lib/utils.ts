@@ -251,3 +251,7 @@ export function buildApiQuery(params: ApiParams): Record<string, any> {
 
   return query;
 }
+
+export function generateSecureToken(length = 48) {
+  return crypto.getRandomValues(new Uint8Array(length)).toString();
+}

@@ -15,19 +15,21 @@ datasource db {
 }
 
 model User {
-  id                String     @id @default(uuid())
-  email             String     @unique
-  name              String?
-  role              Role       @default(USER)
-  password          String
-  phone             String?
-  address           String?
-  startSubscription DateTime?
-  endSubscription   DateTime?
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
-  UserFilm          UserFilm[]
-  Order             Order[]
+  id                 String     @id @default(uuid())
+  email              String     @unique
+  name               String?
+  role               Role       @default(USER)
+  password           String
+  phone              String?
+  address            String?
+  startSubscription  DateTime?
+  endSubscription    DateTime?
+  email_verify_token String?    @unique
+  email_verified     Boolean?   @default(false)
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+  UserFilm           UserFilm[]
+  Order              Order[]
 }
 
 enum Role {

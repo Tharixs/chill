@@ -130,6 +130,8 @@ exports.Prisma.UserScalarFieldEnum = {
   address: 'address',
   startSubscription: 'startSubscription',
   endSubscription: 'endSubscription',
+  email_verify_token: 'email_verify_token',
+  email_verified: 'email_verified',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -220,7 +222,8 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   name: 'name',
   password: 'password',
   phone: 'phone',
-  address: 'address'
+  address: 'address',
+  email_verify_token: 'email_verify_token'
 };
 
 exports.Prisma.UserFilmOrderByRelevanceFieldEnum = {

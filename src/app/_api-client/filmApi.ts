@@ -7,7 +7,7 @@ const filmApi = chillApi.injectEndpoints({
   endpoints: (builder) => ({
     getFilms: builder.query<{ data: PaginationDataType<Film> }, void>({
       query: () => ({
-        url: "api/film",
+        url: "api/films",
         method: "GET",
       }),
     }),

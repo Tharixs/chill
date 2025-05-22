@@ -26,8 +26,8 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInSchema } from "@/lib/zod";
-import { signIn } from "next-auth/react";
 import { toast } from "sonner";
+import { handleSignin } from "../actions/authActions";
 
 const FormFields = [
   {
@@ -65,18 +65,14 @@ export default function Page() {
     e.preventDefault();
     form.handleSubmit(async (val) => {
       // Panggil signIn dari next-auth
-      const result = await signIn("credentials", {
-        email: val.email,
-        password: val.password,
-        redirect: false, // jangan redirect otomatis
-      });
+      const result = await handleSignin(val);
 
       // Cek apakah login berhasil
-      if (result?.ok && !result?.error) {
+      if (result?.success) {
         toast.success("Berhasil login");
         router.push("/"); // Redirect manual
       } else {
-        toast.error("Email atau password salah!");
+        alert(result?.message);
         form.reset();
       }
     })();
